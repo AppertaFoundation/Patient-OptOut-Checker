@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit{
       this.hasAccess = response.access;
       this.username = response.username;
 
-      if (!this.hasAccess) {
+      if (this.hasAccess) {
         this.showDisclaimer();
       }
     });

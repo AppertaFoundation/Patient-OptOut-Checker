@@ -18,6 +18,6 @@ export class PatientOptOutService {
   }
 
   public checkPatientNumbers(numbers: string[]): Observable<NumberModel[]>{
-    return this.http.post<NumberModel[]>(environment.apiUrl + '/api/numbers', numbers, { headers: this.headers, withCredentials: true });
+    return this.http.post<NumberModel[]>(environment.apiUrl + '/api/PatientOptOut', numbers, { headers: this.headers, withCredentials: true });
   }
 }
