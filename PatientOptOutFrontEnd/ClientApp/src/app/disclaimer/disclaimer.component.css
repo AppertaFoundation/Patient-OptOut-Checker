@@ -1,0 +1,12 @@
+h2{
+    text-align: center;
+}
+
+.mat-dialog-actions{
+    justify-content: flex-end;
+}
+
+mat-dialog-content{
+    text-align: center;
+    font-weight: bold;
+}

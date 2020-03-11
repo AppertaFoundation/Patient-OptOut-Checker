@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<ngx-spinner size="large" color="#2995cf">
+    <p style="font-size: 40px; color: white">Checking...</p>
+</ngx-spinner>
+
+<div *ngIf="hasAccess == true">
+    <header style="text-align: left; font-size: 110%;  height: 25px; margin-top: 0px; background-color: black;">
+        <div style="color:white; margin-left: 20px;">Welcome {{ username }}</div>
+    </header>
+
+    <header style="text-align:center; font-size: 180%; color:black; background-color: white; height: 85px;">
+        <img src="assets/Logo.jpg" alt="NHSLogo" style="float: right; width: 214px; height: 103px; margin-top: -40px; margin-right : 20px;">
+        <h2 style="margin-top: 50px; margin-left: 230px;">Opt Out Checker</h2>
+    </header>
+
+    <div>
+        <p style="text-align: center; font-size: 180%">NHS or Hospital Numbers:</p>
+        <p style="font-size: 135%; color:darkgrey; text-align: center">Please enter one number per line, any special characters will be removed</p>
+    </div>
+
+    <div style ="text-align: center;">
+        <p *ngIf="btnShowEmptyMessage">You Must Enter Text to Check the Opt Out Status </p>
+        <p *ngIf="btnShowCopyMessage" style="font-size: 135%">Copied to Clipboard</p>
+        <p *ngIf="resultsReplacedMessage" style="font-size: 115%">{{ resultsReplaced }} Result(s) have been removed due to formatting - Please enter only Patient and Hosptial Numbers</p>
+    </div>
+
+    <div class="textboxDiv">
+        <div class="textAreaDiv">
+            <button type="button" class="copyButton" (click)="btnCopyClicked(userInput)"><i class="fa fa-copy"></i>
+                <span class="copyButtonText">Copy Results to Clipboard</span>
+            </button>
+            <textarea id="textArea" [(ngModel)]="textInput" style="height: 300px; width: 300px; border: 2px solid black; font-size: 150%" #userInput></textarea>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <br/>
+        <button type="button" class="checkButton" (click)="btnCheckClicked(textInput)">Check</button>
+    </div>
+
+    <footer [innerHTML]="trustDisclaimer"></footer>
+</div>
+
+<div *ngIf="hasAccess == false" class="noAccess">
+  <mat-icon>lock</mat-icon>
+  <br />
+  <p style="font-weight: 700; font-size: 180%;">You do not have the required access for the Opt Out Checker</p>
+  <br />
+  <br />
+  <div [innerHTML]="noAccess"></div>
+</div>
