@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { environment } from '../../environments/environment'
+import { EnvironmentService } from '../environment.service';
 
 @Component({
   selector: 'app-disclaimer',
@@ -8,10 +8,11 @@ import { environment } from '../../environments/environment'
   styleUrls: ['./disclaimer.component.css']
 })
 export class DisclaimerComponent implements OnInit {
-  public initialDisclaimer: string = environment.initialDisclaimer;
+  public initialDisclaimer: string;
 
-  constructor(public disclaimerRef: MatDialogRef<DisclaimerComponent>) { }
+  constructor(public disclaimerRef: MatDialogRef<DisclaimerComponent>, private environmentService: EnvironmentService) { }
 
   ngOnInit() {
+    this.initialDisclaimer = this.environmentService.initialDisclaimer
   }
 }

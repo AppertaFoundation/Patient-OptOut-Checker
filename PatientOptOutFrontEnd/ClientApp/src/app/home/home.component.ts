@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../environments/environment'
 import { PatientOptOutService } from '../patient-opt-out.service';
+import { EnvironmentService } from '../environment.service';
 import { NumberModel } from '../number-model';
 import { AuthorizationModel } from '../authorization-model';
 import { DisclaimerComponent } from '../disclaimer/disclaimer.component';
@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit{
   public textInput: string;
   public hasAccess: boolean;
   public username: string;
-  public trustDisclaimer: string = environment.trustDisclaimer;
-  public noAccess: string = environment.noAccess;
+  public trustDisclaimer: string;
+  public noAccess: string;
   public form: FormGroup;
   public btnShowEmptyMessage = false;
   public btnShowCopyMessage = false;
@@ -29,12 +29,17 @@ export class HomeComponent implements OnInit{
 
   constructor(
     private patientOptOutService: PatientOptOutService,
+    private environmentService: EnvironmentService,
     public disclaimer: MatDialog,
     private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
-    this.getAccess();
+    this.environmentService.setAllSettings().subscribe(() => {
+      this.getAccess();
+      this.trustDisclaimer = this.environmentService.trustDisclaimer;
+      this.noAccess = this.environmentService.noAccess;
+    });
   }
 
   public getAccess() {
