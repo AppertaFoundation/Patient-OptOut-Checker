@@ -18,18 +18,21 @@ We are currently working to provide a prebuilt version of the API and Web App wi
 #### Configuring the 'Opt-Out Checker'
 Upon downloading the application, there are two files that must be configured for your trust.  
 
-***'appsettings.json'*** is located at PatientOptOutAPI/appsettings.json. There are three variables to change here:
+***'appsettings.json'*** is located at PublishedFiles/API/appsettings.json. There are three variables to change here:
 - ***'DataWarehouseContext'*** stores the connection string for the database that contains the table of patients that have opted-out. This is what the program will compare the entered numbers against.
+- ***'LogContext'*** stores the connection string for the database in which the application will create a table to store logs of what users entered, should the ***'LoggingEnabled'*** attribute be set to true. Should you decide to use logging, the command ```Update-Database -Context LogContext``` must be run in the package manager console prior to running the program
 - ***'FrontEndUrl'*** will store the desired url address for the front end, this is used for CORS.
 - ***'ActiveDirectoryGroupName'*** stores the name of the AD Group that the user must be a part of the access the application. It is recommended that a new AD group is created to add users of the application to. The API will pick up the name of the domain it is running on automatically.
+- ***'LoggingEnabled'*** will enable logs to be created and stored if set to true, whereas no logs will be created if set to false
+
  
- ***'environment.ts'*** is located at PatientOptOutFrontEnd/ClientApp/src/environments/environment.ts. There are four more variables to change here:
+ ***'environment.ts'*** is located at PublishedFiles/FrontEnd/ClientApp/dist/PatientOptOutFrontEnd/assets/settings.json. There are four more variables to change here:
 - ***'apiUrl'*** is the web url for the 'Opt-Out Checker' API that points to the location of both the authentication service and the numbers service. Only the base part is needed
 - ***'trustDisclaimer'*** is the text that will be displayed at the bottom of the page. It is recomended that a link to NHS Digital's page on the Opt-Out Scheme is provided, as well as a link to your trust's individual privacy notice
 - ***'initialDisclaimer'*** is the text that will show on the 'Terms of Use' pop-up that will appear upon entering the website
 - ***'noAccess'*** text that will be displayed on the screen when an unauthorised user attempts to access the website 
  
-You can also change the logo displayed in the top right of the screen by changing the image ***'Logo.jpg'*** located at PatientOptOutFrontEnd/ClientApp/src/assets/Logo.jpg. The file name must remain the same.
+You can also change the logo displayed in the top right of the screen by changing the image ***'Logo.jpg'*** located at PublishedFiles/FrontEnd/ClientApp/dist/PatientOptOutFrontEnd/assets/Logo.jpeg. The file name must remain the same.
 ***
 
 #### Configuring a Database Table

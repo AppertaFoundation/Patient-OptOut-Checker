@@ -31,8 +31,11 @@ namespace PatientOptOutAPI
 
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("http://localhost:4200", frontEndUrl).AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
             services.AddDbContext<DataWarehouseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DataWarehouseContext")));
+            services.AddDbContext<LogContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LogContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<LogService, LogService>();
 
             //Setup Windows Authentication and Policy to restrict access to specific Active Directory group (Specified in appsettings.json)
             services.AddTransient<IClaimsTransformation, WindowsClaimsTransformer>();

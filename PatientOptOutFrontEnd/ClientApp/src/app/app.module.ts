@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component'
 import { RouterModule, Routes} from '@angular/router';
 import { PatientOptOutService } from './patient-opt-out.service';
+import { EnvironmentService } from './environment.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatDialogModule } from '@angular/material';
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     DisclaimerComponent
   ],
   providers: [
-    PatientOptOutService
+    PatientOptOutService,
+    EnvironmentService
   ],
   bootstrap: [
     AppComponent

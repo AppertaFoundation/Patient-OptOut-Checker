@@ -9,6 +9,7 @@ using PatientOptOutAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace PatientOptOutAPI.Controllers
 {
@@ -19,12 +20,14 @@ namespace PatientOptOutAPI.Controllers
     public class PatientOptOutController : ControllerBase
     {
         private readonly DataWarehouseContext _context;
+        private readonly LogService _logService;
         public readonly IOptions<ApplicationSettings> _config;
 
         //Injects controller with the controller context
-        public PatientOptOutController(DataWarehouseContext context, IOptions<ApplicationSettings> config)
+        public PatientOptOutController(DataWarehouseContext context, LogService logService, IOptions<ApplicationSettings> config)
         {
             _context = context;
+            _logService = logService;
             _config = config;
         }
         
@@ -43,6 +46,12 @@ namespace PatientOptOutAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if(_config.Value.LoggingEnabled)
+            {
+                var message = "Patient Identifiers Checked: " + string.Join(", ", numbers.ToArray());
+                _logService.LogMessage(message, User.GetUsernameWithoutDomain());
+            }
+            
             //Fetches database columns and checks to see if they contain the input(s). If so, it is add to a list
             var listOfNHSMatches = _context.vw_PatientOptOut.Where(row => numbers.Contains(row.NHSNumber)).Select(itemInList => itemInList.NHSNumber).ToList();
             var listOfHospitalMatches = _context.vw_PatientOptOut.Where(row => numbers.Contains(row.HospitalNumber)).Select(itemInList => itemInList.HospitalNumber).ToList();
