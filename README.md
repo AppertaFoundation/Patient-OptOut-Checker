@@ -16,11 +16,15 @@ For more information of the Opt-Out scheme, please visit https://digital.nhs.uk/
 
 #### Running the 'Opt-Out Checker'  
 
-To run the application through a website, two new sites will need to be created in IIS, one for the API and one for the front-end. Once they are created, copy the files from the *API* folder in the downloaded zip and paste them in the folder for the website, which can be accessed by selecting the *Explore* option. Do the same for the *FrontEnd* folder
+The latest released version of the app is available from the Releases tab in GitHub. The zip file contains published versions of the API and Website to be configured and deployed through IIS.
 
-Windows Authentication will also need to be enabled on the API. Selecting *Authentication* and then switch ***Windows Authentication*** to ***'Enabled'***. 
+Two new sites will need to be created in IIS, one for the API and one for the front-end.
 
-IIS must also be configured to allow JSON files. To do this, on the file for the front-end website, select *MIME Types*, click *Add...* and enter ***.json*** in the file extension and ***application/json*** in the MIME type. Once thats been added, go back and select *Handler Mappings*, click *Add Script Map...* and enter ****.json*** in the request path, ***C:\WINDOWS\system32\inetsrv\asp.dll*** in the executable text box and a name in the Name box.
+Copy the files from the *API* folder in the downloaded zip and paste them in the folder for the website. Do the same for the *FrontEnd* folder
+
+Windows Authentication will need to be enabled on the API. Selecting *Authentication* and then switch ***Windows Authentication*** to ***'Enabled'***. 
+
+IIS must also be configured to allow JSON files. On the front-end IIS Site, select *MIME Types*, click *Add...* and enter ***.json*** in the file extension and ***application/json*** in the MIME type. Once thats been added, go back and select *Handler Mappings*, click *Add Script Map...* and enter ****.json*** in the request path, ***C:\WINDOWS\system32\inetsrv\asp.dll*** in the executable text box and a name in the Name box.
 
 ***
 
@@ -52,8 +56,15 @@ Within this table, two columns ***'HospitalNumber'*** and ***'NHSNumber'*** are 
 
 ![Table](/README-Pics/vw_PatientOptOut.png)
 
-These columns will be populated with the Hospital Number and NHS Number of patients that have opted-out of having their data used.
+These columns will be populated with the Hospital Number and NHS Number of patients that have opted-out of having their data used. Full details of populating this table from the MESH follow:
 
+[Check for National Data Opt-outs service](
+https://digital.nhs.uk/services/national-data-opt-out/compliance-with-the-national-data-opt-out/check-for-national-data-opt-outs-service): guidance on how to install and configure MESH to enable lists of NHS numbers to be processed through the Check for National Data Opt-outs service, including a full test data pack.
+
+For the local part after this, we have an automated process that queries our Data Warehouse (DW) on a weekly basis and pulls the patient NHS Numbers into a flat file ready for upload where the MESH process picks it up.
+
+Then another automated process to pull the returned data passed back through MESH into the DW before updating our main patient entity.  This is then ready to provide the SQL View used by the  opt-out App.
+ 
 ***
 
 #### Using the 'Opt-Out Checker'  
