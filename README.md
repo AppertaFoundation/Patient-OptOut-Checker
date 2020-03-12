@@ -39,7 +39,7 @@ Upon downloading the application, there are two files that must be configured fo
 - ***'LoggingEnabled'*** will enable logs to be created and stored if set to true, whereas no logs will be created if set to false
 
  
-***'environment.ts'*** is located at PublishedFiles/FrontEnd/ClientApp/dist/PatientOptOutFrontEnd/assets/settings.json. There are four more variables to change here:
+***'environment.ts'*** is located at PublishedFiles/FrontEnd/ClientApp/dist/assets/settings.json. There are four more variables to change here:
 - ***'apiUrl'*** is the web url for the 'Opt-Out Checker' API that points to the location of both the authentication service and the numbers service. Only the base part is needed
 - ***'trustDisclaimer'*** is the text that will be displayed at the bottom of the page. It is recomended that a link to NHS Digital's page on the Opt-Out Scheme is provided, as well as a link to your trust's individual privacy notice
 - ***'initialDisclaimer'*** is the text that will show on the 'Terms of Use' pop-up that will appear upon entering the website
