@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~8.2.5",
     "@angular/router": "~8.2.5",
     "bootstrap": "^4.3.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "ngx-clipboard": "^12.3.0",
     "ngx-spinner": "^8.0.3",
     "rxjs": "~6.4.0",
